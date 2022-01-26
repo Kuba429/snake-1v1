@@ -1,3 +1,5 @@
+import { Response, Request } from "express";
+import path = require("path");
 import RoomTracker from "./RoomTracker";
 
 const express = require("express");
@@ -6,13 +8,18 @@ const PORT: number = 5000;
 const { Server } = require("socket.io");
 
 app.use(express.static("client/dist"));
+app.get("*", (req: Request, res: Response) => {
+    res.sendFile(
+        path.resolve(__dirname, "../", "client", "dist", "index.html")
+    );
+});
 
 const server = app.listen(PORT, () => {
     console.log("server running at port " + PORT);
 });
 
 export const io = new Server(server);
-const roomTracker = new RoomTracker();
+export const roomTracker = new RoomTracker();
 io.on("connection", (socket) => {
     // console.log("client connected");
     socket.on("disconnect", () => {
