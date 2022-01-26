@@ -9,17 +9,23 @@ class RoomTracker {
         if (!roomId) {
             return 0;
         }
-        const size: number = io.sockets.adapter.rooms?.get(roomId)?.size || 0;
-        this.rooms[roomId] = size;
-        this.clearEmptyRooms();
-        return size;
+        return io.sockets.adapter.rooms?.get(roomId)?.size || 0;
     }
-    clearEmptyRooms() {
-        for (let item in this.rooms) {
-            if (this.rooms[item] < 1) {
-                delete this.rooms[item];
-            }
-        }
+    getAllRoomsStatus(): object {
+        const activeRooms: string[] = this.getActiveRooms();
+        let status: object = {};
+        activeRooms.forEach((item) => {
+            status[item] = this.getRoomStatus(item);
+        });
+        return status
+    }
+    getActiveRooms(): string[] {
+        let rooms = io.sockets.adapter.rooms.keys();
+        rooms = Array.from(rooms);
+        rooms = rooms.filter((item: string) => {
+            return item.length < 16;
+        });
+        return rooms;
     }
 }
 export default RoomTracker;
