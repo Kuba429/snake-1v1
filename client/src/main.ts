@@ -1,7 +1,4 @@
-import { io, Socket } from "socket.io-client";
+import SocketHandler from "./SocketHandler";
 import "./styles/index.scss";
 
-const socket: Socket = io("localhost:5000");
-socket.on("test", (data) => {
-    console.log(data);
-});
+const socket = new SocketHandler();
