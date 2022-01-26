@@ -6,17 +6,15 @@ class SocketHandler {
     username: string;
     constructor() {
         this.socket = io("localhost:5000");
-        this.room;
+        this.room = getRoomUrl();
         this.username = "guest";
+        this.joinRoom();
     }
 
     joinRoom() {
         const room = getRoomUrl();
         this.socket.emit("join", room);
         this.room = room;
-    }
-    getRoomStatus(){
-        this.socket.emit('getRoomStatus')
     }
 }
 
