@@ -1,17 +1,21 @@
 import { Response, Request } from "express";
 import path = require("path");
+import cors = require("cors");
 import RoomTracker from "./RoomTracker";
 
 const express = require("express");
 const app = express();
 const PORT: number = 5000;
 const { Server } = require("socket.io");
-
+app.use(cors());
 app.use(express.static("client/dist"));
 app.get("/r/*", (req: Request, res: Response) => {
-    res.sendFile(
-        path.resolve(__dirname, "../", "client", "dist", "game.html")
-    );
+    res.sendFile(path.resolve(__dirname, "../", "client", "dist", "game.html"));
+});
+
+app.get("/activeRooms", (req: Request, res: Response) => {
+    console.log(roomTracker.getActiveRooms());
+    res.send(roomTracker.getActiveRooms());
 });
 
 const server = app.listen(PORT, () => {
