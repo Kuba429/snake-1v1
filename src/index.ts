@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const PORT = 5000;
+const PORT: number = 5000;
 const { Server } = require("socket.io");
 
 app.use(express.static("client/dist"));
@@ -12,5 +12,10 @@ const server = app.listen(PORT, () => {
 const io = new Server(server);
 
 io.on("connection", (socket) => {
-    io.to(socket).emit("test", "test");
+    console.log("client connected");
+    socket.emit("test", "test");
+
+    socket.on("disconnect", () => {
+        console.log("client disconnected");
+    });
 });
