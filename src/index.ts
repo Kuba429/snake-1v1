@@ -8,9 +8,9 @@ const PORT: number = 5000;
 const { Server } = require("socket.io");
 
 app.use(express.static("client/dist"));
-app.get("*", (req: Request, res: Response) => {
+app.get("/r/*", (req: Request, res: Response) => {
     res.sendFile(
-        path.resolve(__dirname, "../", "client", "dist", "index.html")
+        path.resolve(__dirname, "../", "client", "dist", "game.html")
     );
 });
 
