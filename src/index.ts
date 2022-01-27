@@ -14,8 +14,7 @@ app.get("/r/*", (req: Request, res: Response) => {
 });
 
 app.get("/activeRooms", (req: Request, res: Response) => {
-    console.log(roomTracker.getActiveRooms());
-    res.send(roomTracker.getActiveRooms());
+    res.send(roomTracker.getAllRoomsStatus());
 });
 
 const server = app.listen(PORT, () => {
