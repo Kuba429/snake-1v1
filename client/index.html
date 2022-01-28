@@ -8,25 +8,25 @@
 	</head>
 	<body>
 		<div id="root">
-			<form id="usernameForm">
+			<form id="mainForm">
 				<input
 					class="usernameInput"
 					name="username"
 					type="text"
 					maxlength="15"
 					required
-					placeholder="Enter here" />
+					placeholder="Username" />
+				<input
+					class="roomInput"
+					type="text"
+					name="room"
+					maxlength="15"
+					required
+					placeholder="Room" />
+				<button type="submit">submit</button>
 			</form>
-			<ul class="availableRooms">
-				<form id="roomForm">
-					<input
-						required
-						type="text"
-						name="room"
-						maxlength="15"
-						class="roomInput" />
-				</form>
-			</ul>
+
+			<ul class="availableRooms"></ul>
 		</div>
 		<script type="module" src="/src/landingPage.ts"></script>
 	</body>
