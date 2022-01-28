@@ -4,11 +4,14 @@ import axios from "axios";
 const usernameForm = <HTMLFormElement>(
     document?.querySelector("form#usernameForm")
 );
+const roomInput = document.querySelector(".roomInput")!;
 const usernameInput: HTMLInputElement =
     document.querySelector(".usernameInput")!;
+
 const storedUsername = localStorage.getItem("username");
 usernameInput!.value =
     storedUsername !== "guest" && storedUsername ? storedUsername : "";
+
 usernameForm?.addEventListener("submit", (e) => {
     e.preventDefault();
     const formData = new FormData(<HTMLFormElement>e.target);
@@ -28,15 +31,17 @@ const getActiveRooms = async (): Promise<object> => {
     return activeRooms.data;
 };
 
-const init = async () => {
+const listRooms = async () => {
     const roomList = document.querySelector(".availableRooms");
+    //remove all current children in order to avoid listing a room twice
+    while (roomList?.firstChild) roomList.removeChild(roomList.firstChild);
+    roomList?.appendChild(roomInput);
     const rooms: object = await getActiveRooms();
     for (let item in rooms) {
         roomList?.appendChild(createListItem(<keyof object>item, rooms));
     }
 };
 
-init();
 function createListItem<T extends keyof object>(item: T, object: object) {
     // anchor tag
     let a = document.createElement("a");
@@ -57,3 +62,5 @@ function createListItem<T extends keyof object>(item: T, object: object) {
     li.classList.add("roomElement");
     return li;
 }
+
+listRooms();
