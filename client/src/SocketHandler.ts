@@ -9,12 +9,21 @@ class SocketHandler {
 		this.room = getRoomUrl();
 		this.username = "guest";
 		this.joinRoom();
+		this.setupListeners();
 	}
 
 	joinRoom() {
 		const room = getRoomUrl();
 		this.socket.emit("join", room);
 		this.room = room;
+	}
+	setupListeners() {
+		this.socket.on("joinRejection", (data) => {
+			alert(data);
+		});
+		this.socket.on("joined", () => {
+			console.log("joined successfully");
+		});
 	}
 }
 

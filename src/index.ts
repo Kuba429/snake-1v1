@@ -35,8 +35,13 @@ io.on("connection", (socket) => {
 	});
 
 	socket.on("join", (data: string) => {
-		socket.join(data);
-		currentRoomId = data;
+		if (roomTracker.getRoomStatus(data) < 2) {
+			socket.join(data);
+			currentRoomId = data;
+			socket.emit("joined");
+		} else {
+			socket.emit("joinRejection", "Room full");
+		}
 	});
 	socket.on("getRoomStatus", (data: string) => {
 		roomTracker.getRoomStatus(data);
