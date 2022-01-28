@@ -10,35 +10,35 @@ const { Server } = require("socket.io");
 app.use(cors());
 app.use(express.static("client/dist"));
 app.get("/r/*", (req: Request, res: Response) => {
-    res.sendFile(path.resolve(__dirname, "../", "client", "dist", "game.html"));
+	res.sendFile(path.resolve(__dirname, "../", "client", "dist", "game.html"));
 });
 
 app.get("/activeRooms", (req: Request, res: Response) => {
-    res.send(roomTracker.getAllRoomsStatus());
+	res.send(roomTracker.getAllRoomsStatus());
 });
 
 const server = app.listen(PORT, () => {
-    console.log("server running at port " + PORT);
+	console.log("server running at port " + PORT);
 });
 
 export const io = new Server(server);
 export const roomTracker = new RoomTracker();
 io.on("connection", (socket) => {
-    // console.log("client connected");
-    socket.on("disconnect", () => {
-        // console.log("client disconnected");
-    });
-    let username: string = "guest";
-    let currentRoomId: string;
-    socket.on("usernameChange", (data: string) => {
-        username = data;
-    });
+	// console.log("client connected");
+	socket.on("disconnect", () => {
+		// console.log("client disconnected");
+	});
+	let username: string = "guest";
+	let currentRoomId: string;
+	socket.on("usernameChange", (data: string) => {
+		username = data;
+	});
 
-    socket.on("join", (data: string) => {
-        socket.join(data);
-        currentRoomId = data;
-    });
-    socket.on("getRoomStatus", (data: string) => {
-        roomTracker.getRoomStatus(data);
-    });
+	socket.on("join", (data: string) => {
+		socket.join(data);
+		currentRoomId = data;
+	});
+	socket.on("getRoomStatus", (data: string) => {
+		roomTracker.getRoomStatus(data);
+	});
 });
