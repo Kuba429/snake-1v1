@@ -18,7 +18,14 @@
 					placeholder="Enter here" />
 			</form>
 			<ul class="availableRooms">
-				<input type="text" class="roomInput" />
+				<form id="roomForm">
+					<input
+						required
+						type="text"
+						name="room"
+						maxlength="15"
+						class="roomInput" />
+				</form>
 			</ul>
 		</div>
 		<script type="module" src="/src/landingPage.ts"></script>
