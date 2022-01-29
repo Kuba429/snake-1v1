@@ -25,12 +25,7 @@ const server = app.listen(PORT, () => {
 export const io = new Server(server);
 export const roomTracker = new RoomTracker();
 io.on("connection", (socket) => {
-	socket.on("disconnect", () => {
-		const used = process.memoryUsage().heapUsed / 1024 / 1024;
-		console.log(
-			`The script uses approximately ${Math.round(used * 100) / 100} MB`
-		);
-	});
+	socket.on("disconnect", () => {});
 	let username: string = "guest";
 	let currentRoomId: string;
 	socket.on("usernameChange", (data: string) => {
