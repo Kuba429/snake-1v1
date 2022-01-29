@@ -2,6 +2,7 @@ import { Response, Request } from "express";
 import path = require("path");
 import cors = require("cors");
 import RoomTracker from "./RoomTracker";
+import { Game } from "./Game";
 
 const express = require("express");
 const app = express();
@@ -24,9 +25,11 @@ const server = app.listen(PORT, () => {
 export const io = new Server(server);
 export const roomTracker = new RoomTracker();
 io.on("connection", (socket) => {
-	// console.log("client connected");
 	socket.on("disconnect", () => {
-		// console.log("client disconnected");
+		const used = process.memoryUsage().heapUsed / 1024 / 1024;
+		console.log(
+			`The script uses approximately ${Math.round(used * 100) / 100} MB`
+		);
 	});
 	let username: string = "guest";
 	let currentRoomId: string;
@@ -34,11 +37,15 @@ io.on("connection", (socket) => {
 		username = data;
 	});
 
-	socket.on("join", (data: string) => {
+	socket.on("join", async (data: string) => {
 		if (roomTracker.getRoomStatus(data) < 2) {
 			socket.join(data);
 			currentRoomId = data;
 			socket.emit("joined");
+			if (roomTracker.getRoomStatus(data) == 2) {
+				let socketsInRoom = await io.in(data).fetchSockets();
+				new Game(socketsInRoom, data);
+			}
 		} else {
 			socket.emit("joinRejection", "Room full");
 		}
