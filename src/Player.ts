@@ -18,7 +18,7 @@ export class Player {
 		this.socket = socket;
 		this.x = x;
 		this.y = y;
-		gridSize = gridSize;
+		this.gridSize = gridSize;
 		this.direction = "ArrowUp";
 		this.ready = true;
 		this.queue = this.direction;
