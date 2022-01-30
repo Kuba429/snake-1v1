@@ -9,6 +9,7 @@ export class Game {
 	p1: Socket;
 	p2: Socket;
 	interval: typeof setInterval;
+	fps: number;
 	constructor(sockets: Array<Socket>, roomId: string) {
 		this.roomId = roomId;
 		this.sockets = sockets;
@@ -16,6 +17,7 @@ export class Game {
 		this.p1 = this.sockets[0];
 		this.p2 = this.sockets[1];
 		this.interval = undefined;
+		this.fps = 1;
 		this.setupListeners();
 		this.start();
 	}
