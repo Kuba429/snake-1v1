@@ -26,8 +26,18 @@ export class Player {
 			{ x: this.x, y: this.y },
 			{ x: this.x, y: this.y },
 		];
+		this.setupListeners();
 	}
-	setup() {}
+	setupListeners() {
+		this.socket.on("changeDirection", (data) => {
+			const arrowDirection: string = data;
+			if (this.direction != getOpposite(arrowDirection!) && this.ready) {
+				this.direction = arrowDirection;
+			}
+			this.queue = arrowDirection;
+			this.ready = false;
+		});
+	}
 	move() {
 		// tail
 		this.tail[this.tail.length - 1].x = this.x;

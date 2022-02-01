@@ -19,7 +19,7 @@ export class Game {
 		this.p1 = new Player(this.sockets[0], 1, 10, this.gridSize);
 		this.p2 = new Player(this.sockets[1], 29, 10, this.gridSize);
 		this.interval = undefined;
-		this.fps = 1;
+		this.fps = 5;
 		this.setupListeners();
 		this.start();
 	}
@@ -27,8 +27,6 @@ export class Game {
 		this.interval = setInterval(() => {
 			this.executeFrame();
 		}, 1000 / this.fps);
-		console.log(this.p1);
-		console.log(this.p2);
 	}
 	executeFrame() {
 		this.p1.move();
