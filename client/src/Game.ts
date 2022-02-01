@@ -1,3 +1,4 @@
+import { socket } from "./main";
 interface cordData {
 	x: number;
 	y: number;
@@ -20,6 +21,7 @@ export class Game {
 		this.canvas = <HTMLCanvasElement>document.querySelector("#mainCanvas");
 		this.ctx = this.canvas.getContext("2d");
 		this.cellSize = this.canvas.width / this.gridSize;
+		this.setupDirectionListeners();
 	}
 	update(data: playersCords) {
 		this.clearCanvas();
@@ -45,6 +47,21 @@ export class Game {
 				this.cellSize,
 			];
 			this.ctx?.fillRect(...rectCords);
+		});
+	}
+	setupDirectionListeners() {
+		const arrows = document.querySelectorAll<HTMLElement>(".arrow");
+		arrows.forEach((arrow) => {
+			arrow.addEventListener("click", () => {
+				socket.setDirection(arrow.dataset.direction!);
+			});
+		});
+
+		addEventListener("keydown", (e) => {
+			const element: HTMLElement = document.querySelector(
+				`.arrow.${e.code}`
+			)!;
+			element && element.click();
 		});
 	}
 	clearCanvas() {

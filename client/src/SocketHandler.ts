@@ -18,6 +18,9 @@ class SocketHandler {
 		this.socket.emit("join", room);
 		this.room = room;
 	}
+	setDirection(direction: string) {
+		console.log(direction);
+	}
 	setupListeners() {
 		this.socket.on("joinRejection", (data) => {
 			alert(data);
