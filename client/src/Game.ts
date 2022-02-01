@@ -1,3 +1,12 @@
+interface cordData {
+	x: number;
+	y: number;
+	tail: Array<number>;
+}
+interface playersCords {
+	[key: string]: cordData;
+}
+
 export class Game {
 	gridSize: number;
 	canvas: HTMLCanvasElement;
@@ -9,12 +18,12 @@ export class Game {
 		this.ctx = this.canvas.getContext("2d");
 		this.cellSize = this.canvas.width / this.gridSize;
 	}
-	update(data: any) {
+	update(data: playersCords) {
 		this.clearCanvas();
 		this.draw(data.you);
 		this.draw(data.enemy);
 	}
-	draw(data: any) {
+	draw(data: cordData) {
 		this.ctx!.fillStyle = "#ffffff";
 		const rectCords: [number, number, number, number] = [
 			data.y * this.cellSize,
