@@ -1,4 +1,5 @@
 import { io, Socket } from "socket.io-client";
+import { game } from "./main";
 
 class SocketHandler {
 	socket: Socket;
@@ -23,6 +24,9 @@ class SocketHandler {
 		});
 		this.socket.on("joined", () => {
 			console.log("joined successfully");
+		});
+		this.socket.on("update", (data) => {
+			game.update(data);
 		});
 	}
 }
