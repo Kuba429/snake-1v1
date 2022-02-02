@@ -60,6 +60,7 @@ export class Game {
 		});
 	}
 	changeDirection(newDirection: string) {
+		this.player.direction = newDirection;
 		console.log(newDirection);
 	}
 	clearCanvas() {
