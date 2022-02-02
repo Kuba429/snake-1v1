@@ -42,21 +42,21 @@ export class Snake {
 
 		switch (this.direction) {
 			case "ArrowUp":
-				this.y -= game.cellSize;
+				this.y -= 1;
 				break;
 			case "ArrowDown":
-				this.y += game.cellSize;
+				this.y += 1;
 				break;
 			case "ArrowRight":
-				this.x += game.cellSize;
+				this.x += 1;
 				break;
 			case "ArrowLeft":
-				this.x -= game.cellSize;
+				this.x -= 1;
 				break;
 			default:
 				return;
 		}
-		const limit = (game.gridSize - 1) * game.cellSize;
+		const limit = game.gridSize - 1;
 		if (this.x > limit) {
 			this.x = 0;
 		} else if (this.x < 0) {
@@ -81,8 +81,8 @@ export class Snake {
 	draw() {
 		//head
 		const rectCords: [number, number, number, number] = [
-			this.x,
-			this.y,
+			this.x * game.cellSize,
+			this.y * game.cellSize,
 			game.cellSize,
 			game.cellSize,
 		];
@@ -90,8 +90,8 @@ export class Snake {
 		// tail
 		this.tail.forEach((block) => {
 			const rectCords: [number, number, number, number] = [
-				block.x,
-				block.y,
+				block.x * game.cellSize,
+				block.y * game.cellSize,
 				game.cellSize,
 				game.cellSize,
 			];
