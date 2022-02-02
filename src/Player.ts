@@ -1,5 +1,3 @@
-// this class is based on a class from my singleplayer version of snake
-// https://github.com/Kuba429/snake
 import { Socket } from "./Game";
 interface cell {
 	x: number;
