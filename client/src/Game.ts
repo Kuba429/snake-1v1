@@ -1,3 +1,4 @@
+import { game } from "./main";
 import { getOpposite, Snake } from "./Snake";
 export class Game {
 	gridSize: number;
@@ -6,6 +7,9 @@ export class Game {
 	cellSize: number;
 	player: Snake;
 	enemy: Snake;
+	loopNow: number;
+	loopThen: number;
+	fps: number;
 	constructor() {
 		this.gridSize = 30;
 		this.canvas = <HTMLCanvasElement>document.querySelector("#mainCanvas");
@@ -13,22 +17,33 @@ export class Game {
 		this.cellSize = this.canvas.width / this.gridSize;
 		this.player = new Snake("#000000", 10, 4);
 		this.enemy = new Snake("#f0f0f0", 28, 20);
+		this.fps = 7;
+		this.loopNow = this.getTime();
+		this.loopThen = this.getTime();
 		this.setupDirectionListeners();
 	}
-
+	getNextFrame() {
+		game.loopNow = game.getTime();
+		if (game.loopNow - game.loopThen > 1000 / game.fps) {
+			game.loopThen = game.getTime();
+			game.executeFrame();
+		}
+		requestAnimationFrame(game.getNextFrame);
+	}
 	executeFrame() {
 		this.clearCanvas();
 		this.player.update();
 		this.enemy.update();
 	}
-
+	getTime() {
+		return new Date().getTime();
+	}
 	setupDirectionListeners() {
 		const arrows = document.querySelectorAll<HTMLElement>(".arrow");
 		arrows.forEach((arrow) => {
 			arrow.addEventListener("click", () => {
 				const arrowDirection: string = arrow.dataset.direction!;
 				if (
-					this.player.direction != this.player.queue &&
 					this.player.direction != getOpposite(arrowDirection!) &&
 					this.player.ready
 				) {

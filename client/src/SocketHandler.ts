@@ -29,7 +29,7 @@ class SocketHandler {
 			console.log("joined successfully");
 		});
 		this.socket.on("update", () => {
-			game.executeFrame();
+			// game.executeFrame();
 		});
 	}
 }
