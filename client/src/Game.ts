@@ -1,38 +1,25 @@
-import { socket } from "./main";
 import { getOpposite, Snake } from "./Snake";
-interface cordData {
-	x: number;
-	y: number;
-	tail: Array<cell>;
-}
-interface playersCords {
-	[key: string]: cordData;
-}
-interface cell {
-	x: number;
-	y: number;
-}
 export class Game {
 	gridSize: number;
 	canvas: HTMLCanvasElement;
 	ctx; // type assigned automatically
 	cellSize: number;
 	player: Snake;
-	opponent: Snake;
+	enemy: Snake;
 	constructor() {
 		this.gridSize = 30;
 		this.canvas = <HTMLCanvasElement>document.querySelector("#mainCanvas");
 		this.ctx = this.canvas.getContext("2d");
 		this.cellSize = this.canvas.width / this.gridSize;
 		this.player = new Snake("#000000", 10, 4);
-		this.opponent = new Snake("#f0f0f0", 28, 20);
+		this.enemy = new Snake("#f0f0f0", 28, 20);
 		this.setupDirectionListeners();
 	}
 
 	executeFrame() {
 		this.clearCanvas();
 		this.player.update();
-		this.opponent.update();
+		this.enemy.update();
 	}
 
 	setupDirectionListeners() {

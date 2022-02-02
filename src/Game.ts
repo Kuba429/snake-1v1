@@ -19,7 +19,7 @@ export class Game {
 		this.p1 = new Player(this.sockets[0], 1, 10, this.gridSize);
 		this.p2 = new Player(this.sockets[1], 29, 10, this.gridSize);
 		this.interval = undefined;
-		this.fps = 5;
+		this.fps = 7;
 		this.setupListeners();
 		this.start();
 	}
@@ -29,13 +29,8 @@ export class Game {
 		}, 1000 / this.fps);
 	}
 	executeFrame() {
-		this.p1.move();
-		this.p2.move();
-
-		const p1Pos = { x: this.p1.x, y: this.p1.y, tail: this.p1.tail };
-		const p2Pos = { x: this.p2.x, y: this.p2.y, tail: this.p2.tail };
-		this.p1.socket.emit("update", { you: p1Pos, enemy: p2Pos });
-		this.p2.socket.emit("update", { you: p2Pos, enemy: p1Pos });
+		this.p1.socket.emit("update", "a");
+		this.p2.socket.emit("update", "a");
 	}
 	setupListeners() {
 		this.sockets.forEach((socket) => {
