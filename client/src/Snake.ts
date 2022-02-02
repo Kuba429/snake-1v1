@@ -80,7 +80,7 @@ export class Snake {
 	detectCollision() {}
 }
 
-const getOpposite = (direction: string) => {
+export const getOpposite = (direction: string) => {
 	let toReturn: string = undefined!;
 	switch (direction) {
 		case "ArrowUp":

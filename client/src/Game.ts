@@ -1,5 +1,5 @@
 import { socket } from "./main";
-import { Snake } from "./Snake";
+import { getOpposite, Snake } from "./Snake";
 interface cordData {
 	x: number;
 	y: number;
@@ -28,40 +28,27 @@ export class Game {
 		this.opponent = new Snake("#f0f0f0", 28, 20);
 		this.setupDirectionListeners();
 	}
-	update(data: playersCords) {
-		this.clearCanvas();
-		this.draw(data.you, false);
-		this.draw(data.enemy, true);
-	}
+
 	executeFrame() {
 		this.clearCanvas();
+		this.player.update();
+		this.opponent.update();
 	}
-	draw(data: cordData, isEnemy: boolean) {
-		this.ctx!.fillStyle = isEnemy ? "#ffffff" : "#000000";
-		//head
-		const rectCords: [number, number, number, number] = [
-			data.x * this.cellSize,
-			data.y * this.cellSize,
-			this.cellSize,
-			this.cellSize,
-		];
-		this.ctx?.fillRect(...rectCords);
-		//tail
-		data.tail.forEach((block) => {
-			const rectCords: [number, number, number, number] = [
-				block.x * this.cellSize,
-				block.y * this.cellSize,
-				this.cellSize,
-				this.cellSize,
-			];
-			this.ctx?.fillRect(...rectCords);
-		});
-	}
+
 	setupDirectionListeners() {
 		const arrows = document.querySelectorAll<HTMLElement>(".arrow");
 		arrows.forEach((arrow) => {
 			arrow.addEventListener("click", () => {
-				socket.setDirection(arrow.dataset.direction!);
+				const arrowDirection: string = arrow.dataset.direction!;
+				if (
+					this.player.direction != this.player.queue &&
+					this.player.direction != getOpposite(arrowDirection!) &&
+					this.player.ready
+				) {
+					this.changeDirection(arrowDirection);
+				}
+				this.player.queue = arrowDirection;
+				this.player.ready = false;
 			});
 		});
 
