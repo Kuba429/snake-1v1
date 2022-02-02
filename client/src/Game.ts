@@ -1,4 +1,4 @@
-import { game } from "./main";
+import { game, socket } from "./main";
 import { getOpposite, Snake } from "./Snake";
 export class Game {
 	gridSize: number;
@@ -15,8 +15,9 @@ export class Game {
 		this.canvas = <HTMLCanvasElement>document.querySelector("#mainCanvas");
 		this.ctx = this.canvas.getContext("2d");
 		this.cellSize = this.canvas.width / this.gridSize;
-		this.player = new Snake("#000000", 10, 4);
-		this.enemy = new Snake("#f0f0f0", 28, 20);
+		const randomNumber = Math.floor(Math.random() * 30);
+		this.player = new Snake("#000000", randomNumber, randomNumber);
+		this.enemy = new Snake("#f0f0f0", -randomNumber, -randomNumber);
 		this.fps = 7;
 		this.loopNow = this.getTime();
 		this.loopThen = this.getTime();
@@ -33,7 +34,12 @@ export class Game {
 	executeFrame() {
 		this.clearCanvas();
 		this.player.update();
-		this.enemy.update();
+		this.enemy.draw();
+		socket.socket.emit("enemyUpdate", {
+			x: this.player.x,
+			y: this.player.y,
+			tail: this.player.tail,
+		});
 	}
 	getTime() {
 		return new Date().getTime();
@@ -47,7 +53,7 @@ export class Game {
 					this.player.direction != getOpposite(arrowDirection!) &&
 					this.player.ready
 				) {
-					this.changeDirection(arrowDirection);
+					this.player.direction = arrowDirection;
 				}
 				this.player.queue = arrowDirection;
 				this.player.ready = false;
@@ -60,10 +66,6 @@ export class Game {
 			)!;
 			element && element.click();
 		});
-	}
-	changeDirection(newDirection: string) {
-		this.player.direction = newDirection;
-		console.log(newDirection);
 	}
 	clearCanvas() {
 		this.ctx?.clearRect(0, 0, this.canvas.width, this.canvas.height);

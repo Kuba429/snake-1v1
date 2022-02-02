@@ -72,7 +72,7 @@ export class Snake {
 			this.queue != this.direction &&
 			getOpposite(this.queue) != this.direction
 		) {
-			game.changeDirection(this.queue);
+			this.direction = this.queue;
 		}
 		this.ready = true;
 		this.draw();

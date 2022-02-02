@@ -3,6 +3,7 @@ import { Player } from "./Player";
 export interface Socket {
 	on(event: string, callback: (data: any) => void);
 	emit(event: string, data: any);
+	id: string;
 }
 export class Game {
 	roomId: string;
@@ -23,11 +24,7 @@ export class Game {
 		this.setupListeners();
 		this.start();
 	}
-	start() {
-		this.interval = setInterval(() => {
-			this.executeFrame();
-		}, 1000 / this.fps);
-	}
+	start() {}
 	executeFrame() {
 		this.p1.socket.emit("update", "a");
 		this.p2.socket.emit("update", "a");
@@ -35,6 +32,14 @@ export class Game {
 	setupListeners() {
 		this.sockets.forEach((socket) => {
 			//listeners here
+			socket.on("enemyUpdate", (data) => {
+				const otherPlayer = this.sockets.filter(
+					(item) => item.id !== socket.id
+				);
+				otherPlayer.forEach((item) => {
+					item.emit("update", data);
+				});
+			});
 		});
 	}
 }
