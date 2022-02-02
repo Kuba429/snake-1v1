@@ -1,4 +1,5 @@
 import { socket } from "./main";
+import { Snake } from "./Snake";
 interface cordData {
 	x: number;
 	y: number;
@@ -16,17 +17,24 @@ export class Game {
 	canvas: HTMLCanvasElement;
 	ctx; // type assigned automatically
 	cellSize: number;
+	player: Snake;
+	opponent: Snake;
 	constructor() {
 		this.gridSize = 30;
 		this.canvas = <HTMLCanvasElement>document.querySelector("#mainCanvas");
 		this.ctx = this.canvas.getContext("2d");
 		this.cellSize = this.canvas.width / this.gridSize;
+		this.player = new Snake("#000000", 10, 4);
+		this.opponent = new Snake("#f0f0f0", 28, 20);
 		this.setupDirectionListeners();
 	}
 	update(data: playersCords) {
 		this.clearCanvas();
 		this.draw(data.you, false);
 		this.draw(data.enemy, true);
+	}
+	executeFrame() {
+		this.clearCanvas();
 	}
 	draw(data: cordData, isEnemy: boolean) {
 		this.ctx!.fillStyle = isEnemy ? "#ffffff" : "#000000";
@@ -63,6 +71,9 @@ export class Game {
 			)!;
 			element && element.click();
 		});
+	}
+	changeDirection(newDirection: string) {
+		console.log(newDirection);
 	}
 	clearCanvas() {
 		this.ctx?.clearRect(0, 0, this.canvas.width, this.canvas.height);

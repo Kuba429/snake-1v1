@@ -25,6 +25,10 @@ export class Snake {
 		];
 		this.isOnline = true;
 	}
+	update() {
+		this.move();
+		this.draw();
+	}
 	move() {
 		// tail
 		this.tail[this.tail.length - 1].x = this.x;
@@ -66,7 +70,7 @@ export class Snake {
 			this.queue != this.direction &&
 			getOpposite(this.queue) != this.direction
 		) {
-			this.direction = this.queue;
+			game.changeDirection(this.queue);
 		}
 		this.ready = true;
 		this.draw();
