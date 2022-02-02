@@ -28,8 +28,8 @@ class SocketHandler {
 		this.socket.on("joined", () => {
 			console.log("joined successfully");
 		});
-		this.socket.on("update", (data) => {
-			game.update(data);
+		this.socket.on("update", () => {
+			game.executeFrame();
 		});
 	}
 }

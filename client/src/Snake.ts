@@ -76,7 +76,26 @@ export class Snake {
 		this.draw();
 		this.detectCollision();
 	}
-	draw() {}
+	draw() {
+		//head
+		const rectCords: [number, number, number, number] = [
+			this.x,
+			this.y,
+			game.cellSize,
+			game.cellSize,
+		];
+		game.ctx?.fillRect(...rectCords);
+		// tail
+		this.tail.forEach((block) => {
+			const rectCords: [number, number, number, number] = [
+				block.x,
+				block.y,
+				game.cellSize,
+				game.cellSize,
+			];
+			game.ctx?.fillRect(...rectCords);
+		});
+	}
 	detectCollision() {}
 }
 
