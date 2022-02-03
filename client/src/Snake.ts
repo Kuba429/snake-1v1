@@ -75,7 +75,6 @@ export class Snake {
 			this.direction = this.queue;
 		}
 		this.ready = true;
-		this.draw();
 		this.detectCollision();
 	}
 	draw() {
