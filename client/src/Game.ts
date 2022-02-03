@@ -41,6 +41,7 @@ export class Game {
 	}
 	executeFrame() {
 		this.player.update();
+		this.redraw();
 		socket.socket.emit("enemyUpdate", {
 			x: this.player.x,
 			y: this.player.y,
