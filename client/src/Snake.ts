@@ -113,6 +113,17 @@ export class Snake {
 			if (JSON.stringify(block) == headPosition) game.over();
 		});
 	}
+	addToTail() {
+		if (this.tail.length < 1) {
+			this.tail.unshift({
+				x: this.x,
+				y: this.y,
+			});
+		} else {
+			let lastBlock = this.tail[this.tail.length - 1];
+			this.tail.unshift({ ...lastBlock });
+		}
+	}
 }
 
 export const getOpposite = (direction: string) => {
