@@ -31,10 +31,14 @@ export class Game {
 		}
 		requestAnimationFrame(game.getNextFrame);
 	}
-	executeFrame() {
+	redraw() {
 		this.clearCanvas();
-		this.player.update();
+		this.player.draw();
 		this.enemy.draw();
+	}
+	executeFrame() {
+		this.player.move();
+		this.redraw();
 		socket.socket.emit("enemyUpdate", {
 			x: this.player.x,
 			y: this.player.y,

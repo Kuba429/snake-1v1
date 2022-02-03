@@ -32,6 +32,7 @@ class SocketHandler {
 			game.enemy.x = x;
 			game.enemy.y = y;
 			game.enemy.tail = tail;
+			game.redraw();
 		});
 	}
 }
