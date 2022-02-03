@@ -36,6 +36,9 @@ export class Game {
 		this.player.draw();
 		this.enemy.draw();
 	}
+	over() {
+		alert("game over");
+	}
 	executeFrame() {
 		this.player.update();
 		socket.socket.emit("enemyUpdate", {

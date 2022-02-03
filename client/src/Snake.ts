@@ -30,6 +30,7 @@ export class Snake {
 	update() {
 		this.move();
 		this.draw();
+		this.detectCollision();
 	}
 	move() {
 		// tail
@@ -75,7 +76,6 @@ export class Snake {
 			this.direction = this.queue;
 		}
 		this.ready = true;
-		this.detectCollision();
 	}
 	draw() {
 		//head
@@ -97,7 +97,22 @@ export class Snake {
 			game.ctx?.fillRect(...rectCords);
 		});
 	}
-	detectCollision() {}
+	detectCollision() {
+		const headPosition: string = JSON.stringify({ x: this.x, y: this.y });
+		const playerHeadPosition: string = JSON.stringify({
+			x: game.player.x,
+			y: game.player.y,
+		});
+		const enemyHeadPosition: string = JSON.stringify({
+			x: game.enemy.x,
+			y: game.enemy.y,
+		});
+		if (playerHeadPosition == enemyHeadPosition) game.over();
+		const tails: Array<block> = [...game.player.tail, ...game.enemy.tail];
+		tails.forEach((block: block) => {
+			if (JSON.stringify(block) == headPosition) game.over();
+		});
+	}
 }
 
 export const getOpposite = (direction: string) => {

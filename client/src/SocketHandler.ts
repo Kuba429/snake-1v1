@@ -33,6 +33,7 @@ class SocketHandler {
 			game.enemy.y = y;
 			game.enemy.tail = tail;
 			game.redraw();
+			game.enemy.detectCollision();
 		});
 	}
 }
