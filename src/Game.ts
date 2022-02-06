@@ -23,6 +23,17 @@ export class Game {
 	setupListeners() {
 		this.sockets.forEach((socket) => {
 			//listeners here
+			socket.on("disconnect", () => {
+				// rooms are being reset this way for now
+				// will probably change it later
+				this.sockets.forEach((socket) => {
+					socket.emit("stopGame");
+				});
+				this.sockets = [];
+				this.p1 = undefined;
+				this.p2 = undefined;
+			});
+
 			socket.on("enemyUpdate", (data) => {
 				const otherPlayer = this.sockets.filter(
 					(item) => item.id !== socket.id

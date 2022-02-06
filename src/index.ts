@@ -25,7 +25,6 @@ const server = app.listen(PORT, () => {
 export const io = new Server(server);
 export const roomTracker = new RoomTracker();
 io.on("connection", (socket) => {
-	socket.on("disconnect", () => {});
 	socket.username = "guest";
 	socket.on("usernameChange", (data: string) => {
 		socket.username = data;
