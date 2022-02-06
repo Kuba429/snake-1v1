@@ -1,6 +1,6 @@
 export interface Socket {
 	on(event: string, callback: (data: any) => void);
-	emit(event: string, data: any);
+	emit(event: string, data?: any);
 	id: string;
 	username: string;
 }
@@ -17,6 +17,8 @@ export class Game {
 		this.p2 = this.sockets[1];
 		this.fps = 7;
 		this.setupListeners();
+
+		this.sockets.forEach((socket) => socket.emit("startGame"));
 	}
 	setupListeners() {
 		this.sockets.forEach((socket) => {
@@ -27,6 +29,11 @@ export class Game {
 				);
 				otherPlayer.forEach((item) => {
 					item.emit("update", data);
+				});
+			});
+			socket.on("gameOver", () => {
+				this.sockets.forEach((socket) => {
+					socket.emit("stopGame");
 				});
 			});
 		});

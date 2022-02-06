@@ -10,6 +10,7 @@ export class Game {
 	loopNow: number;
 	loopThen: number;
 	fps: number;
+	interval: any;
 	constructor() {
 		this.gridSize = 30;
 		this.canvas = <HTMLCanvasElement>document.querySelector("#mainCanvas");
@@ -21,6 +22,7 @@ export class Game {
 		this.fps = 7;
 		this.loopNow = this.getTime();
 		this.loopThen = this.getTime();
+		this.interval = undefined;
 		this.setupDirectionListeners();
 	}
 	getNextFrame() {
@@ -29,7 +31,7 @@ export class Game {
 			game.loopThen = game.getTime();
 			game.executeFrame();
 		}
-		requestAnimationFrame(game.getNextFrame);
+		game.interval = requestAnimationFrame(game.getNextFrame);
 	}
 	redraw() {
 		this.clearCanvas();
@@ -37,7 +39,15 @@ export class Game {
 		this.enemy.draw();
 	}
 	over() {
-		alert("game over");
+		console.log("game over");
+		socket.socket.emit("gameOver");
+	}
+	start() {
+		this.interval = requestAnimationFrame(game.getNextFrame);
+	}
+	stop() {
+		console.log("stop function");
+		cancelAnimationFrame(this.interval);
 	}
 	executeFrame() {
 		this.player.update();

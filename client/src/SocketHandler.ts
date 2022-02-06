@@ -22,6 +22,13 @@ class SocketHandler {
 		this.socket.emit("changeDirection", direction);
 	}
 	setupListeners() {
+		this.socket.on("startGame", () => {
+			game.start();
+		});
+		this.socket.on("stopGame", () => {
+			console.log("stop game socket event");
+			game.stop();
+		});
 		this.socket.on("joinRejection", (data) => {
 			alert(data);
 		});
