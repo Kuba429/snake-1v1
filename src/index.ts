@@ -26,16 +26,14 @@ export const io = new Server(server);
 export const roomTracker = new RoomTracker();
 io.on("connection", (socket) => {
 	socket.on("disconnect", () => {});
-	let username: string = "guest";
-	let currentRoomId: string;
+	socket.username = "guest";
 	socket.on("usernameChange", (data: string) => {
-		username = data;
+		socket.username = data;
 	});
 
 	socket.on("join", async (data: string) => {
 		if (roomTracker.getRoomStatus(data) < 2) {
 			socket.join(data);
-			currentRoomId = data;
 			socket.emit("joined");
 			if (roomTracker.getRoomStatus(data) == 2) {
 				let socketsInRoom = await io.in(data).fetchSockets();

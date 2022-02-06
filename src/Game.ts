@@ -2,14 +2,13 @@ export interface Socket {
 	on(event: string, callback: (data: any) => void);
 	emit(event: string, data: any);
 	id: string;
+	username: string;
 }
 export class Game {
 	roomId: string;
 	sockets: Array<Socket>;
-	gridSize: number;
 	p1: Socket;
 	p2: Socket;
-	interval: ReturnType<typeof setTimeout>;
 	fps: number;
 	constructor(sockets: Array<Socket>, roomId: string) {
 		this.roomId = roomId;
