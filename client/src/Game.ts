@@ -83,6 +83,10 @@ export class Game {
 			)!;
 			element && element.click();
 		});
+		const restartButton = document.querySelector(".restartButton");
+		restartButton?.addEventListener("click", () => {
+			socket.socket.emit("ready");
+		});
 	}
 	clearCanvas() {
 		this.ctx?.clearRect(0, 0, this.canvas.width, this.canvas.height);

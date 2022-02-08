@@ -3,6 +3,7 @@ export interface Socket {
 	emit(event: string, data?: any);
 	id: string;
 	username: string;
+	isReady: boolean;
 }
 export class Game {
 	roomId: string;
@@ -44,8 +45,20 @@ export class Game {
 			});
 			socket.on("gameOver", () => {
 				this.sockets.forEach((socket) => {
+					socket.isReady = false;
 					socket.emit("stopGame");
 				});
+			});
+			socket.on("ready", () => {
+				socket.isReady = true;
+				const readySockets = this.sockets.filter(
+					(s) => s.isReady == true
+				);
+				if (readySockets.length >= 2) {
+					this.sockets.forEach((s) => {
+						s.emit("startGame");
+					});
+				}
 			});
 		});
 	}
