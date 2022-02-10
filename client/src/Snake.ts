@@ -78,6 +78,7 @@ export class Snake {
 		this.ready = true;
 	}
 	draw() {
+		game.ctx!.fillStyle = this.color;
 		//head
 		const rectCords: [number, number, number, number] = [
 			this.x * game.cellSize,
