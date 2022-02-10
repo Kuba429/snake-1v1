@@ -43,6 +43,7 @@ export class Game {
 		socket.socket.emit("gameOver");
 	}
 	start() {
+		this.player.reset();
 		this.interval = requestAnimationFrame(game.getNextFrame);
 	}
 	stop() {

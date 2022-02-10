@@ -32,6 +32,15 @@ export class Snake {
 		this.draw();
 		this.detectCollision();
 	}
+	reset() {
+		this.direction = "ArrowUp";
+		this.x = Math.round(Math.random() * 28) + 1;
+		this.y = Math.round(Math.random() * 28) + 1;
+		this.tail = [
+			{ x: this.x, y: this.y },
+			{ x: this.x, y: this.y },
+		];
+	}
 	move() {
 		// tail
 		this.tail[this.tail.length - 1].x = this.x;
