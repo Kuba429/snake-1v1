@@ -13,7 +13,6 @@ export class Snake {
 	ready: boolean;
 	queue: string;
 	tail: Array<block>;
-	isOnline: boolean;
 	constructor(color: string, x: number, y: number) {
 		this.color = color;
 		this.direction = "ArrowUp";
@@ -25,7 +24,6 @@ export class Snake {
 			{ x: this.x, y: this.y },
 			{ x: this.x, y: this.y },
 		];
-		this.isOnline = true;
 	}
 	update() {
 		this.move();
