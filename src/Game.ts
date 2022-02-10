@@ -5,18 +5,27 @@ export interface Socket {
 	username: string;
 	isReady: boolean;
 }
+interface block {
+	x: number;
+	y: number;
+}
 export class Game {
 	roomId: string;
 	sockets: Array<Socket>;
 	p1: Socket;
 	p2: Socket;
 	fps: number;
+	food: block;
 	constructor(sockets: Array<Socket>, roomId: string) {
 		this.roomId = roomId;
 		this.sockets = sockets;
 		this.p1 = this.sockets[0];
 		this.p2 = this.sockets[1];
 		this.fps = 7;
+		this.food = {
+			x: Math.round(Math.random() * 29),
+			y: Math.round(Math.random() * 29),
+		};
 		this.setupListeners();
 
 		this.sockets.forEach((socket) => socket.emit("startGame"));
@@ -43,6 +52,15 @@ export class Game {
 					item.emit("update", data);
 				});
 			});
+			socket.on("foodEaten", () => {
+				this.food = {
+					x: Math.round(Math.random() * 29),
+					y: Math.round(Math.random() * 29),
+				};
+				this.sockets.forEach((socket) => {
+					socket.emit("newFood", this.food);
+				});
+			});
 			socket.on("gameOver", () => {
 				this.sockets.forEach((socket) => {
 					socket.isReady = false;
@@ -55,8 +73,8 @@ export class Game {
 					(s) => s.isReady == true
 				);
 				if (readySockets.length >= 2) {
-					this.sockets.forEach((s) => {
-						s.emit("startGame");
+					this.sockets.forEach((socket) => {
+						socket.emit("startGame", this.food);
 					});
 				}
 			});

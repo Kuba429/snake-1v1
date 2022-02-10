@@ -1,4 +1,4 @@
-import { game, socket } from "./main";
+import { food, game, socket } from "./main";
 import { getOpposite, Snake } from "./Snake";
 export class Game {
 	gridSize: number;
@@ -35,6 +35,7 @@ export class Game {
 	}
 	redraw() {
 		this.clearCanvas();
+		food.draw();
 		this.player.draw();
 		this.enemy.draw();
 	}
