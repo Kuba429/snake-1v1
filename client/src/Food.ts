@@ -1,4 +1,4 @@
-import { game } from "./main";
+import { game, socket } from "./main";
 
 export class Food {
 	x: number;
@@ -10,6 +10,20 @@ export class Food {
 
 	draw() {
 		game.ctx!.fillStyle = "#00dd00";
-		game.ctx!.fillRect(this.x, this.y, game.cellSize, game.cellSize);
+		const rectCords: [number, number, number, number] = [
+			this.x * game.cellSize,
+			this.y * game.cellSize,
+			game.cellSize,
+			game.cellSize,
+		];
+		game.ctx!.fillRect(...rectCords);
+	}
+	detectCollision() {
+		if (this.x == game.player.x && this.y == game.player.y) {
+			this.eat();
+		}
+	}
+	eat() {
+		socket.socket.emit("foodEaten");
 	}
 }

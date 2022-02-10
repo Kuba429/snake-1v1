@@ -53,6 +53,7 @@ export class Game {
 	}
 	executeFrame() {
 		this.player.update();
+		food.detectCollision();
 		this.redraw();
 		socket.socket.emit("enemyUpdate", {
 			x: this.player.x,

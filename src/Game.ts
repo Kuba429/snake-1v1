@@ -28,7 +28,7 @@ export class Game {
 		};
 		this.setupListeners();
 
-		this.sockets.forEach((socket) => socket.emit("startGame"));
+		this.sockets.forEach((socket) => socket.emit("startGame", this.food));
 	}
 	setupListeners() {
 		this.sockets.forEach((socket) => {
@@ -74,6 +74,10 @@ export class Game {
 				);
 				if (readySockets.length >= 2) {
 					this.sockets.forEach((socket) => {
+						this.food = {
+							x: Math.round(Math.random() * 29),
+							y: Math.round(Math.random() * 29),
+						};
 						socket.emit("startGame", this.food);
 					});
 				}

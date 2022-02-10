@@ -1,5 +1,5 @@
 import { io, Socket } from "socket.io-client";
-import { game } from "./main";
+import { food, game } from "./main";
 
 class SocketHandler {
 	socket: Socket;
@@ -22,7 +22,10 @@ class SocketHandler {
 		this.socket.emit("changeDirection", direction);
 	}
 	setupListeners() {
-		this.socket.on("startGame", () => {
+		this.socket.on("startGame", (newFood) => {
+			if (newFood) {
+				[food.x, food.y] = [newFood.x, newFood.y];
+			}
 			game.start();
 		});
 		this.socket.on("stopGame", () => {
@@ -41,6 +44,10 @@ class SocketHandler {
 			game.enemy.tail = tail;
 			game.redraw();
 			game.enemy.detectCollision();
+		});
+		this.socket.on("newFood", (newFood) => {
+			food.x = newFood.x;
+			food.y = newFood.y;
 		});
 	}
 }
