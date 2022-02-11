@@ -6,7 +6,7 @@ import { Game } from "./Game";
 
 const express = require("express");
 const app = express();
-const PORT: number = 5000;
+const PORT = process.env.PORT || 5000;
 const { Server } = require("socket.io");
 app.use(cors());
 app.use(express.static("client/dist"));
