@@ -6,7 +6,7 @@ class SocketHandler {
 	room: string | undefined;
 	username: string;
 	constructor() {
-		this.socket = io("localhost:5000");
+		this.socket = io();
 		this.room = getRoomUrl();
 		this.username = "guest";
 		this.joinRoom();
