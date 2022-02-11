@@ -27,7 +27,6 @@ export class Game {
 			y: Math.round(Math.random() * 29),
 		};
 		this.setupListeners();
-
 		this.sockets.forEach((socket) => socket.emit("startGame", this.food));
 	}
 	setupListeners() {
@@ -53,10 +52,7 @@ export class Game {
 				});
 			});
 			socket.on("foodEaten", () => {
-				this.food = {
-					x: Math.round(Math.random() * 29),
-					y: Math.round(Math.random() * 29),
-				};
+				this.newFoodPosition();
 				this.sockets.forEach((socket) => {
 					socket.emit("newFood", this.food);
 				});
@@ -73,15 +69,18 @@ export class Game {
 					(s) => s.isReady == true
 				);
 				if (readySockets.length >= 2) {
+					this.newFoodPosition();
 					this.sockets.forEach((socket) => {
-						this.food = {
-							x: Math.round(Math.random() * 29),
-							y: Math.round(Math.random() * 29),
-						};
 						socket.emit("startGame", this.food);
 					});
 				}
 			});
 		});
+	}
+	newFoodPosition() {
+		this.food = {
+			x: Math.round(Math.random() * 29),
+			y: Math.round(Math.random() * 29),
+		};
 	}
 }
