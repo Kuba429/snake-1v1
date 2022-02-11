@@ -1,3 +1,15 @@
+@import "variables.scss";
+
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background: $dark;
+}
 #mainCanvas {
-	background: rgb(7, 110, 206);
+	background: $dark;
+	border: solid 1px $light;
+	border-radius: 4px;
+	margin: auto;
 }

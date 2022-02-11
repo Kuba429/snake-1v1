@@ -17,8 +17,8 @@ export class Game {
 		this.ctx = this.canvas.getContext("2d");
 		this.cellSize = this.canvas.width / this.gridSize;
 		const randomNumber = Math.floor(Math.random() * 30);
-		this.player = new Snake("#000000", randomNumber, randomNumber);
-		this.enemy = new Snake("#f0f0f0", -randomNumber, -randomNumber);
+		this.player = new Snake("#2EB086", randomNumber, randomNumber);
+		this.enemy = new Snake("#B8405E", -randomNumber, -randomNumber);
 		this.fps = 7;
 		this.loopNow = this.getTime();
 		this.loopThen = this.getTime();
@@ -93,5 +93,18 @@ export class Game {
 	}
 	clearCanvas() {
 		this.ctx?.clearRect(0, 0, this.canvas.width, this.canvas.height);
+		this.drawGrid();
+	}
+	drawGrid() {
+		this.ctx!.strokeStyle = "#4A4C62";
+		for (let i = 1; i < this.gridSize; i++) {
+			this.ctx!.moveTo(i * this.cellSize, 0);
+			this.ctx!.lineTo(i * this.cellSize, this.cellSize * this.gridSize);
+
+			this.ctx!.moveTo(0, i * this.cellSize);
+			this.ctx!.lineTo(this.cellSize * this.gridSize, i * this.cellSize);
+		}
+
+		this.ctx!.stroke();
 	}
 }
