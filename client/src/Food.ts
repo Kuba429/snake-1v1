@@ -25,5 +25,6 @@ export class Food {
 	}
 	eat() {
 		socket.socket.emit("foodEaten");
+		game.player.addToTail();
 	}
 }
