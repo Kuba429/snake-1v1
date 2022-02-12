@@ -1,5 +1,5 @@
 @import "variables.scss";
-
+@import "button.scss";
 body {
 	display: flex;
 	flex-direction: column;
@@ -7,6 +7,41 @@ body {
 	align-items: center;
 	background: $dark;
 }
+
+.controls {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(2, 1fr);
+	.arrow {
+		grid-row: 2;
+	}
+	.ArrowUp {
+		grid-column: 2;
+		grid-row: 1;
+		svg {
+			transform: rotate(270deg);
+		}
+	}
+	.ArrowDown {
+		grid-column: 2;
+		svg {
+			transform: rotate(90deg);
+		}
+	}
+	.ArrowLeft {
+		grid-column: 1;
+		svg {
+			transform: rotate(180deg);
+		}
+	}
+	.ArrowRight {
+		grid-column: 3;
+	}
+	.restartButton {
+		display: none;
+	}
+}
+
 #mainCanvas {
 	background: $dark;
 	border: solid 1px $light;
