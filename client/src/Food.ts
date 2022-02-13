@@ -9,7 +9,7 @@ export class Food {
 	}
 
 	draw() {
-		game.ctx!.fillStyle = "#00dd00";
+		game.ctx!.fillStyle = "#7FCD91";
 		const rectCords: [number, number, number, number] = [
 			this.x * game.cellSize,
 			this.y * game.cellSize,

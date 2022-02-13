@@ -1,17 +1,25 @@
 @import "variables.scss";
 @import "button.scss";
+@import "scoreBox.scss";
 body {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	align-items: center;
-	background: $dark;
+	align-items: flex-start;
+	background: $background;
+	width: fit-content;
+	margin: auto;
+
+	max-height: 99vh;
+	font-family: "Press Start 2P", cursive;
 }
 
 .controls {
 	display: grid;
+	margin: 1rem auto;
 	grid-template-columns: repeat(3, 1fr);
 	grid-template-rows: repeat(2, 1fr);
+	gap: 10px;
 	.arrow {
 		grid-row: 2;
 	}
@@ -43,8 +51,8 @@ body {
 }
 
 #mainCanvas {
-	background: $dark;
-	border: solid 1px $light;
+	max-height: 70vh;
+	max-width: 99vw;
+	background: $background2;
 	border-radius: 4px;
-	margin: auto;
 }
