@@ -7,6 +7,7 @@ export class InfoScreen {
 		this.message = "Game Over";
 		this.rootElement = document.querySelector("#infoScreen")!;
 		this.setupListeners();
+		this.showScreen();
 	}
 	toggleScreen() {
 		this.rootElement.classList.toggle("active");
