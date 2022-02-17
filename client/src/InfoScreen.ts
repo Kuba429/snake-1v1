@@ -3,9 +3,11 @@ import { socket } from "./main";
 export class InfoScreen {
 	message: string;
 	rootElement: HTMLElement;
+	isSetReady: boolean;
 	constructor() {
 		this.message = "Game Over";
 		this.rootElement = document.querySelector("#infoScreen")!;
+		this.isSetReady = false;
 		this.setupListeners();
 		this.showScreen();
 	}
@@ -22,8 +24,13 @@ export class InfoScreen {
 	}
 	setupListeners() {
 		const readyButton = document.querySelector(".readyButton");
+		const readyIndicator = document.querySelector(".readyIndicator");
 		readyButton?.addEventListener("click", () => {
-			socket.socket.emit("ready");
+			if (!this.isSetReady) {
+				this.isSetReady = true;
+				socket.socket.emit("ready");
+				readyIndicator?.classList.add("active");
+			}
 		});
 	}
 }

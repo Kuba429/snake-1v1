@@ -24,6 +24,12 @@
 		background-color: $light;
 		color: $background;
 	}
+	.readyIndicator {
+		opacity: 0;
+	}
+	.readyIndicator.active {
+		opacity: 1;
+	}
 }
 #infoScreen.active {
 	display: flex;
