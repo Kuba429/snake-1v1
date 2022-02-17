@@ -1,6 +1,7 @@
 @import "variables.scss";
 @import "button.scss";
 @import "scoreBox.scss";
+@import "infoScreen.scss";
 body {
 	display: flex;
 	flex-direction: column;
@@ -48,11 +49,4 @@ body {
 	.restartButton {
 		display: none;
 	}
-}
-
-#mainCanvas {
-	max-height: 70vh;
-	max-width: 99vw;
-	background: $background2;
-	border-radius: 4px;
 }

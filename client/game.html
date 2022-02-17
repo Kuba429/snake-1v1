@@ -22,7 +22,16 @@
 				<span class="opponent score">0</span>
 			</div>
 		</div>
-		<canvas height="900" width="900" id="mainCanvas"></canvas>
+		<div id="canvasContainer">
+			<div id="infoScreen">
+				<h2 class="message">Game is over</h2>
+				<button class="getReady">Ready</button>
+				<h4 class="readyStatusContainer">
+					<span class="readyStatus">1</span>/2
+				</h4>
+			</div>
+			<canvas height="900" width="900" id="mainCanvas"></canvas>
+		</div>
 		<div class="controls">
 			<button class="arrow ArrowUp" data-direction="ArrowUp">
 				<img src="./src/assets/arrow.svg" />
