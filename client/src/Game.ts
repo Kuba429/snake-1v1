@@ -1,4 +1,4 @@
-import { food, game, socket } from "./main";
+import { food, game, info, socket } from "./main";
 import { getOpposite, Snake } from "./Snake";
 export class Game {
 	gridSize: number;
@@ -46,10 +46,12 @@ export class Game {
 	start() {
 		this.player.reset();
 		this.interval = requestAnimationFrame(game.getNextFrame);
+		info.hideScreen();
 	}
 	stop() {
 		console.log("stop function");
 		cancelAnimationFrame(this.interval);
+		info.showScreen();
 	}
 	executeFrame() {
 		this.player.update();
