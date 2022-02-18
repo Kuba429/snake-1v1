@@ -61,6 +61,7 @@ export class Game {
 			x: this.player.x,
 			y: this.player.y,
 			tail: this.player.tail,
+			username: socket.username,
 		});
 	}
 	getTime() {

@@ -1,5 +1,5 @@
 import { io, Socket } from "socket.io-client";
-import { food, game, info } from "./main";
+import { food, game, info, score } from "./main";
 
 class SocketHandler {
 	socket: Socket;
@@ -8,7 +8,8 @@ class SocketHandler {
 	constructor() {
 		this.socket = io();
 		this.room = getRoomUrl();
-		this.username = "guest";
+		this.username =
+			localStorage.getItem("username")?.substring(0, 15) || "Guest";
 		this.joinRoom();
 		this.setupListeners();
 	}
@@ -39,13 +40,20 @@ class SocketHandler {
 		this.socket.on("joined", () => {
 			console.log("joined successfully");
 		});
-		this.socket.on("update", ({ x, y, tail }) => {
-			game.enemy.x = x;
-			game.enemy.y = y;
-			game.enemy.tail = tail;
-			game.redraw();
-			game.enemy.detectCollision();
-		});
+		this.socket.on(
+			"update",
+			({ x, y, tail, username: opponentUsername }) => {
+				if (score.opponentUsername != opponentUsername) {
+					score.opponentUsername = opponentUsername;
+					score.updateUsernames();
+				}
+				game.enemy.x = x;
+				game.enemy.y = y;
+				game.enemy.tail = tail;
+				game.redraw();
+				game.enemy.detectCollision();
+			}
+		);
 		this.socket.on("newFood", (newFood) => {
 			food.x = newFood.x;
 			food.y = newFood.y;

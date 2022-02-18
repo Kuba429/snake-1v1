@@ -1,9 +1,10 @@
 export class ScoreTracker {
 	username: string;
 	opponentUsername: string;
-	constructor(username: string, opponentUsername: string) {
-		this.username = username;
-		this.opponentUsername = opponentUsername;
+	constructor() {
+		this.username =
+			localStorage.getItem("username")?.substring(0, 15) || "Guest";
+		this.opponentUsername = "Opponent";
 		this.updateUsernames();
 	}
 	updateUsernames() {
