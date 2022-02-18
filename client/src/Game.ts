@@ -67,6 +67,7 @@ export class Game {
 		return new Date().getTime();
 	}
 	setupDirectionListeners() {
+		//controls
 		const arrows = document.querySelectorAll<HTMLElement>(".arrow");
 		arrows.forEach((arrow) => {
 			arrow.addEventListener("click", () => {
@@ -91,6 +92,12 @@ export class Game {
 		const restartButton = document.querySelector(".restartButton");
 		restartButton?.addEventListener("click", () => {
 			socket.socket.emit("ready");
+		});
+		// stop the game when tab loses focus
+		document.addEventListener("visibilitychange", () => {
+			if (document.visibilityState === "hidden") {
+				game.over();
+			}
 		});
 	}
 	clearCanvas() {
