@@ -3,10 +3,12 @@ import { socket } from "./main";
 export class InfoScreen {
 	message: string;
 	rootElement: HTMLElement;
+	messageElement: HTMLElement;
 	isSetReady: boolean;
 	constructor() {
 		this.message = "Game Over";
 		this.rootElement = document.querySelector("#infoScreen")!;
+		this.messageElement = document.querySelector(".message")!;
 		this.isSetReady = false;
 		this.setupListeners();
 		this.showScreen();
@@ -21,6 +23,10 @@ export class InfoScreen {
 	hideScreen() {
 		this.rootElement.classList.contains("active") &&
 			this.rootElement.classList.remove("active");
+	}
+	updateMessage(newMessage: string = "Game Over") {
+		this.message = newMessage;
+		this.messageElement.textContent = this.message;
 	}
 	setupListeners() {
 		const readyButton = document.querySelector(".readyButton");

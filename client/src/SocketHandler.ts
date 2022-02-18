@@ -1,5 +1,5 @@
 import { io, Socket } from "socket.io-client";
-import { food, game } from "./main";
+import { food, game, info } from "./main";
 
 class SocketHandler {
 	socket: Socket;
@@ -28,8 +28,9 @@ class SocketHandler {
 			}
 			game.start();
 		});
-		this.socket.on("stopGame", () => {
+		this.socket.on("stopGame", (message) => {
 			console.log("stop game socket event");
+			info.updateMessage(message);
 			game.stop();
 		});
 		this.socket.on("joinRejection", (data) => {

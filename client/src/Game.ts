@@ -39,9 +39,9 @@ export class Game {
 		this.player.draw();
 		this.enemy.draw();
 	}
-	over() {
-		console.log("game over");
-		socket.socket.emit("gameOver");
+	over(message: string = "Game Over") {
+		console.log(message);
+		socket.socket.emit("gameOver", message);
 	}
 	start() {
 		this.player.reset();

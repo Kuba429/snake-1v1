@@ -57,10 +57,10 @@ export class Game {
 					socket.emit("newFood", this.food);
 				});
 			});
-			socket.on("gameOver", () => {
+			socket.on("gameOver", (message) => {
 				this.sockets.forEach((socket) => {
 					socket.isReady = false;
-					socket.emit("stopGame");
+					socket.emit("stopGame", message);
 				});
 			});
 			socket.on("ready", () => {
