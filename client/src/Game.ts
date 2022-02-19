@@ -1,4 +1,4 @@
-import { food, game, info, socket } from "./main";
+import { food, game, info, score, socket } from "./main";
 import { getOpposite, Snake } from "./Snake";
 export class Game {
 	gridSize: number;
@@ -97,7 +97,7 @@ export class Game {
 		// stop the game when tab loses focus
 		document.addEventListener("visibilitychange", () => {
 			if (document.visibilityState === "hidden") {
-				game.over();
+				game.over(`${score.opponentUsername} won!`);
 			}
 		});
 	}

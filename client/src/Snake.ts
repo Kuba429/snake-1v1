@@ -1,6 +1,6 @@
 // this class is based on a class from my singleplayer version of snake
 // https://github.com/Kuba429/snake
-import { game } from "./main";
+import { game, score } from "./main";
 interface block {
 	x: number;
 	y: number;
@@ -115,10 +115,12 @@ export class Snake {
 			x: game.enemy.x,
 			y: game.enemy.y,
 		});
-		if (playerHeadPosition == enemyHeadPosition) game.over();
+		if (playerHeadPosition == enemyHeadPosition) game.over("It's a draw!");
 		const tails: Array<block> = [...game.player.tail, ...game.enemy.tail];
 		tails.forEach((block: block) => {
-			if (JSON.stringify(block) == headPosition) game.over();
+			if (JSON.stringify(block) == headPosition) {
+				game.over(`${score.opponentUsername} won!`);
+			}
 		});
 	}
 	addToTail() {
