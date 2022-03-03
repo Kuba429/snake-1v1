@@ -35,8 +35,8 @@ export class Snake {
 		this.x = Math.round(Math.random() * 28) + 1;
 		this.y = Math.round(Math.random() * 28) + 1;
 		this.tail = [
-			{ x: this.x, y: this.y },
-			{ x: this.x, y: this.y },
+			{ x: this.x, y: this.y + 1 },
+			{ x: this.x, y: this.y + 1 },
 		];
 	}
 	move() {

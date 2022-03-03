@@ -57,6 +57,7 @@ class SocketHandler {
 		this.socket.on("newFood", (newFood) => {
 			food.x = newFood.x;
 			food.y = newFood.y;
+			score.updateScores();
 		});
 	}
 }
