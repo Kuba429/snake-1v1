@@ -106,7 +106,6 @@ export class Snake {
 		});
 	}
 	detectCollision() {
-		const headPosition: string = JSON.stringify({ x: this.x, y: this.y });
 		const playerHeadPosition: string = JSON.stringify({
 			x: game.player.x,
 			y: game.player.y,
@@ -118,7 +117,7 @@ export class Snake {
 		if (playerHeadPosition == enemyHeadPosition) game.over("It's a draw!");
 		const tails: Array<block> = [...game.player.tail, ...game.enemy.tail];
 		tails.forEach((block: block) => {
-			if (JSON.stringify(block) == headPosition) {
+			if (JSON.stringify(block) == playerHeadPosition) {
 				game.over(`${score.opponentUsername} won!`);
 			}
 		});
