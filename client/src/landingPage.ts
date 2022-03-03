@@ -23,7 +23,7 @@ mainForm.addEventListener("submit", (e) => {
 
 const getActiveRooms = async (): Promise<object> => {
 	let activeRooms = await axios({
-		baseURL: "http://localhost:5000",
+		baseURL: document.location.origin,
 		url: "/activeRooms",
 		method: "get",
 		headers: { "Content-Type": "application/json" },
