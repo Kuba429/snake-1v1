@@ -25,9 +25,24 @@ body {
     justify-content: center;
     font-family: inherit;
     font-size: 1.4rem;
+    input,
+    button {
+        border: none;
+        font-family: inherit;
+        padding: 10px;
+    }
     input {
         width: 50%;
-        font-family: inherit;
+        background: $light;
+        color: black;
+    }
+    .usernameInput {
+        border-radius: 5px 0 0 5px;
+    }
+    button {
+        border-radius: 0 5px 5px 0;
+        color: $light;
+        background: $background2;
     }
 }
 ul {
@@ -59,6 +74,12 @@ a {
         flex-direction: column;
         input {
             width: auto;
+        }
+        .usernameInput {
+            border-radius: 5px 5px 0 0;
+        }
+        button {
+            border-radius: 0 0 5px 5px;
         }
     }
 }
