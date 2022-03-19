@@ -1,52 +1,64 @@
 @import "variables.scss";
 body {
-	background-color: $background;
-	font-family: "Press Start 2P", cursive;
+    background-color: $background;
+    font-family: "Press Start 2P", cursive;
 }
 #root {
-	width: 60%;
-	margin: auto;
-	display: flex;
-	background-color: inherit;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	color: $light;
-	position: relative;
+    width: 60%;
+    margin: auto;
+    display: flex;
+    background-color: inherit;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: $light;
+    position: relative;
 }
 #mainForm {
-	position: sticky;
-	top: 0;
-	width: 100%;
-	padding: 10px 0;
-	margin: 20vh 0;
-	background-color: inherit;
-	display: flex;
-	justify-content: center;
-	font-family: inherit;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    padding: 10px 0;
+    margin: 20vh 0;
+    background-color: inherit;
+    display: flex;
+    justify-content: center;
+    font-family: inherit;
     font-size: 1.4rem;
-	input {
-		width: 50%;
-		font-family: inherit;
-	}
+    input {
+        width: 50%;
+        font-family: inherit;
+    }
 }
 ul {
-	width: 100%;
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	li {
-		margin-top: 1rem;
-		padding: 10px;
-		background: $light;
-		border-radius: 5px;
-		color: black;
-	}
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    li {
+        margin-top: 1rem;
+        padding: 10px;
+        background: $light;
+        border-radius: 5px;
+        color: black;
+    }
 }
 a {
-	text-decoration: none;
-	color: inherit;
-	width: 100%;
-	display: flex;
-	justify-content: space-between;
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+@media (max-width: 600px) {
+    #root {
+        width: 95%;
+    }
+    #mainForm {
+        flex-direction: column;
+        input {
+            width: auto;
+        }
+    }
 }
