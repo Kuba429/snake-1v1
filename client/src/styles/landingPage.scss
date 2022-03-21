@@ -43,6 +43,11 @@ body {
         border-radius: 0 5px 5px 0;
         color: $light;
         background: $background2;
+        transition: ease 0.2s all;
+        cursor: pointer;
+        &:hover {
+            background-color: rgba($light, 0.3);
+        }
     }
 }
 ul {
