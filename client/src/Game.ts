@@ -54,6 +54,7 @@ export class Game {
 		info.showScreen();
 	}
 	executeFrame() {
+		score.updateScores();
 		this.player.update();
 		food.detectCollision();
 		this.redraw();
