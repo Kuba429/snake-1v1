@@ -1,38 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<link rel="icon" type="image/svg+xml" href="./favicon.svg" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
-			rel="stylesheet" />
-		<title>Snake</title>
-	</head>
-	<body>
-		<div id="root">
-			<form id="mainForm">
-				<input
-					class="usernameInput"
-					name="username"
-					type="text"
-					maxlength="15"
-					required
-					placeholder="Username" />
-				<input
-					class="roomInput"
-					type="text"
-					name="room"
-					maxlength="15"
-					required
-					placeholder="Room" />
-				<button type="submit">submit</button>
-			</form>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" href="./favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+            rel="stylesheet"
+        />
+        <title>Snake</title>
+    </head>
+    <body>
+        <div id="root">
+            <form id="mainForm">
+                <input
+                    class="usernameInput"
+                    name="username"
+                    type="text"
+                    maxlength="15"
+                    required
+                    placeholder="Username"
+                />
+                <input
+                    class="roomInput"
+                    type="text"
+                    name="room"
+                    maxlength="15"
+                    required
+                    placeholder="Room"
+                />
+                <button type="submit">submit</button>
+            </form>
 
-			<ul class="availableRooms"></ul>
-		</div>
-		<script type="module" src="/src/landingPage.ts"></script>
-	</body>
+            <ul class="availableRooms"></ul>
+        </div>
+        <script type="module" src="/src/landingPage.ts"></script>
+    </body>
 </html>

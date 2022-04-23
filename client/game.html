@@ -1,50 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<link rel="icon" type="image/svg+xml" href="./favicon.svg" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
-			rel="stylesheet" />
-		<title>Snake</title>
-	</head>
-	<body>
-		<div class="score-box">
-			<div class="box">
-				<span class="player username">player</span>
-				<span class="player score">0</span>
-			</div>
-			<div class="box">
-				<span class="opponent username">opponent</span>
-				<span class="opponent score">0</span>
-			</div>
-		</div>
-		<div id="canvasContainer">
-			<div id="infoScreen">
-				<h2 class="message">Game is over</h2>
-				<button class="readyButton">Ready</button>
-				<h4 class="readyIndicator">Waiting for opponent...</h4>
-			</div>
-			<canvas height="900" width="900" id="mainCanvas"></canvas>
-		</div>
-		<div class="controls">
-			<button class="arrow ArrowUp" data-direction="ArrowUp">
-				<img src="./src/assets/arrow.svg" />
-			</button>
-			<button class="arrow ArrowLeft" data-direction="ArrowLeft">
-				<img src="./src/assets/arrow.svg" />
-			</button>
-			<button class="arrow ArrowDown" data-direction="ArrowDown">
-				<img src="./src/assets/arrow.svg" />
-			</button>
-			<button class="arrow ArrowRight" data-direction="ArrowRight">
-				<img src="./src/assets/arrow.svg" />
-			</button>
-			<button class="restartButton">RESTART</button>
-		</div>
-		<script type="module" src="/src/main.ts"></script>
-	</body>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" href="./favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+            rel="stylesheet"
+        />
+        <title>Snake</title>
+    </head>
+    <body>
+        <div class="score-box">
+            <div class="box">
+                <span class="player username">player</span>
+                <span class="player score">0</span>
+            </div>
+            <div class="box">
+                <span class="opponent username">opponent</span>
+                <span class="opponent score">0</span>
+            </div>
+        </div>
+        <div id="canvasContainer">
+            <div id="infoScreen">
+                <h2 class="message">Game is over</h2>
+                <button class="readyButton">Ready</button>
+                <h4 class="readyIndicator">Waiting for opponent...</h4>
+            </div>
+            <canvas height="900" width="900" id="mainCanvas"></canvas>
+        </div>
+        <div class="controls">
+            <button class="arrow ArrowUp" data-direction="ArrowUp">
+                <img src="./src/assets/arrow.svg" />
+            </button>
+            <button class="arrow ArrowLeft" data-direction="ArrowLeft">
+                <img src="./src/assets/arrow.svg" />
+            </button>
+            <button class="arrow ArrowDown" data-direction="ArrowDown">
+                <img src="./src/assets/arrow.svg" />
+            </button>
+            <button class="arrow ArrowRight" data-direction="ArrowRight">
+                <img src="./src/assets/arrow.svg" />
+            </button>
+            <button class="restartButton">RESTART</button>
+        </div>
+        <script type="module" src="/src/main.ts"></script>
+    </body>
 </html>
